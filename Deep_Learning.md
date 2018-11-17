@@ -1,0 +1,2 @@
+- Dropout: [It can solve the problem of deep models being overfitting](https://zhuanlan.zhihu.com/p/23178423)
+- Two ways of speed up the training: 1. Hierarchical Softmax 2. Negative Sampling
