@@ -1,0 +1,14 @@
+- conda list：查看安装的内容
+- conda upgrade -all：更新安装的所有的包
+- conda install package_name，还可以同时安装多个包。类似 conda install pandas numpy 的命令会同时安装所有这些包。还可以通过添加版本号（例如 conda install numpy=1.10）来指定所需的包版本
+- conda remove package_names：命令中的package_names是指你要卸载包的名称，例如你想卸载pandas包：conda remove pandas
+- conda update package_name：如果想更新环境中的所有包（这样做常常很有用），使用：conda update --all
+- conda search search_term：可以搜索包的相关信息，比如版本号
+- conda create -n env_name package_names：env_name 是设置环境的名称（-n 是指该命令后面的env_name是你要创建环境的名称），package_names 是你要安装在创建环境中的包名称。conda create -n py3 python=3.6
+- 在 Windows 上，你可以使用 activate my_env进入，deactivate退出。在 OSX/Linux 上使用 source activate my_env 进入环境，source deactivate退出。
+- conda env export > environment.yaml：将你当前的环境保存到当前终端路径下的YAML文件里（包括Pyhton版本和所有包的名称）。
+- 导出的环境文件，在其他电脑环境中如何使用呢？首先在conda中进入你的环境，比如activate py3，然后#其中-f表示你要导出文件在本地的路径，所以/path/to/environment.yml要换成你本地的实际路径
+conda env update -f=/path/to/environment.yml
+- 对于不使用 conda 的用户，还可以使用 pip freeze > environment.txt 将一个 txt文件导出并包括在其中。pip install -r /path/requirements.txt来导入该环境。
+- conda env list：可以列出你创建的所有环境
+- conda env remove -n env_name：删除指定的环境（在这里环境名为 env_name）
