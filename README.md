@@ -9,5 +9,3 @@
 - **JSON Format**：[{_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:} .......]
 - **Supporting Facts**：[[title, sent_id], [title, sent_id], [title, sent_id] ........]
 - **Context**：[[title, sentences], [title, sentences], [title, sentences] ......]，其中，sentences = [string1, string2, string3, ......]
-- testing
-- asdasd
