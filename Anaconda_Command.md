@@ -12,3 +12,4 @@ conda env update -f=/path/to/environment.yml
 - 对于不使用 conda 的用户，还可以使用 pip freeze > environment.txt 将一个 txt文件导出并包括在其中。pip install -r /path/requirements.txt来导入该环境。
 - conda env list：可以列出你创建的所有环境
 - conda env remove -n env_name：删除指定的环境（在这里环境名为 env_name）
+- 在anaconda的虚拟环境里，也可用`pip/pip3 install <package>`的命令来安装包
