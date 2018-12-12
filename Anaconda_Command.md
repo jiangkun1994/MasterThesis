@@ -13,3 +13,4 @@ conda env update -f=/path/to/environment.yml
 - conda env list：可以列出你创建的所有环境
 - conda env remove -n env_name：删除指定的环境（在这里环境名为 env_name）
 - 在anaconda的虚拟环境里，也可用`pip/pip3 install <package>`的命令来安装包
+- 在虚拟环境中，若Ipython的python版本不一样，可以用`conda install -c anaconda ipython`来更改版本
