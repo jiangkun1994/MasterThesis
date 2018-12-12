@@ -2,3 +2,4 @@
 - du -sh：查询当前文件目录所占的大小
 - sudo find / -name filename：从根目录下开始寻找这个文件
 - ls | wc -l：查询当前目录下的文件数目
+- diff [file1-name] [file2-name]：输出两个文件不同的地方
