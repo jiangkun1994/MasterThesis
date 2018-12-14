@@ -17,3 +17,10 @@
 - **JSON Format**：[{_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:} .......]
 - **Supporting Facts**：[[title, sent_id], [title, sent_id], [title, sent_id] ........]
 - **Context**：[[title, sentences], [title, sentences], [title, sentences] ......]，其中，sentences = [string1, string2, string3, ......]
+
+- **利用DrQA里的TF-IDF model对来自HotpotQA和SQuAD进行检索测试**:
+数据格式脚本见[这里](./scripts/DrQA_eval_txt.py)
+```
+python scripts/retriever/eval.py ~/DrQA/data/dataset/final.txt # HotpotQA
+python scripts/retriever/eval.py ~/DrQA/data/dataset/dev_reduced.txt # SQuAD
+```
