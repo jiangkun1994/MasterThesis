@@ -39,3 +39,8 @@ IDF = log(语料库的文档总数 / 包含该词的文档数+1)
 TF-IDF = TF * IDF
 ```
 - [BM25](https://www.jianshu.com/p/1e498888f505)
+- **Semanctic Matching**: conduct query/document analysis to represent the meanings of query/document with richer representations and then perform matching with the representations.
+- **Text Matching as supervised objective**:
+    - **Representation-based models**: Representation-based models construct a fixed-dimensional vector representation for each text separately and then perform matching within the latent space. (DSSM, CDSSM, ARC-I)
+    - **Interaction-based models**: Interaction-based models compute the interaction between each individual term of both texts. An interaction can be identity or syntactic/semantic similarity. The interaction matrix is subsequently summarized into a matching score. (DRMM, MatchPyramid, Match-SRNN, K-NRM)
+    - **Hybrid models**: Hybrid models consist of (i) a representation component that combines a sequence of words (e.g., a whole text, a window of words) into a fixed-dimensional representation and (ii) an interaction component. These two components can occur (1) in serial or (2) in parallel. (ARC-II, MV-LSTM, Duet, DeepRank)

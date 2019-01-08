@@ -24,3 +24,12 @@
 python scripts/retriever/eval.py ~/DrQA/data/datasets/hotpotreduced-dev.txt # HotpotQA
 python scripts/retriever/eval.py ~/DrQA/data/datasets/stanford-dev.txt # SQuAD
 ```
+### DrQA
+- **SQuAD-v1.1-train.json**：对于SQuAD的json文件，它只有一行，是一个dict，包含了很多数据点
+```
+with open('./SQuAD-v1.1-train.json') as f:
+    dataset = json.load(f)
+
+for line in open('./SQuAD-v1.1-train.json'):
+    dataset = json.loads(line)
+```
