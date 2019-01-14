@@ -4,6 +4,7 @@
 - sudo find / -name filename：从根目录下开始寻找这个文件
 - ls | wc -l：查询当前目录下的文件数目
 - diff [file1-name] [file2-name]：输出两个文件不同的地方
+- tee：在终端输出信息的同时把信息记录到文件中，ls | tee ls.txt   ＃将会在终端上显示ls命令的执行结果，并把执行结果输出到ls.txt 文件中
 ### vim
 - 输入“/”后加要找的关键词，输入“n”向下找关键词，“N”向上找
 - 输入ggVG进行全选，gg 让光标移到首行，在vim才有效，vi中无效 
