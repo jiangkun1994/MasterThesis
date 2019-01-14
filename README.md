@@ -34,3 +34,13 @@ with open('./SQuAD-v1.1-train.json') as f:
 for line in open('./SQuAD-v1.1-train.json'):
     dataset = json.loads(line)
 ```
+<<<<<<< Updated upstream
+=======
+
+### Research Questions
+1. Find out what type of questions the current ranker gets wrong - can you categorize them ? Maybe there are categories of errors that are prominent
+2. Use your IR knowledge and the literature to argue theoretically how to address those bigger error categories
+3. Implement the IR model(s) (deep or not) that your determined to be the right one(s) to use in (2)
+4. Analyze whether the used model reduces some of those errors - it should if steps (1)-(3) have been done correctly
+5. Propose an adaptation to the model of (3) to also improve its performance in at least in error category that the current model is not good at
+>>>>>>> Stashed changes

@@ -19,6 +19,11 @@
 - **召回率r**：预测出来的对的数 / 客观正确的数目
 - **F1 Score**：2pr / (p+r)
 - **Attention Mechanism**：Weighted combination of all the input states. With an attention mechanism we no longer try encode the full source sentence into a fixed-length vector. Rather, we allow the decoder to “attend” to different parts of the source sentence at each step of the output generation. Importantly, we let the model learn what to attend to based on the input sentence and what it has produced so far. So, in languages that are pretty well aligned (like English and German) the decoder would probably choose to attend to things sequentially. Attending to the first word when producing the first English word, and so on
+- NLP一共有四大类任务：
+    - 序列标注：分词，词性标注，命名实体识别
+    - 分类任务：文本分类，情感分析
+    - 句子关系判断：自然语言推理，深度文本匹配，问答系统
+    - 生成式任务：机器翻译，文本摘要生成
 
 ## NLP Pipeline
 1. **Sentence Segmentation**：断句，句子切分
