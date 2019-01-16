@@ -18,6 +18,7 @@ import json
 parser = argparse.ArgumentParser()
 parser.add_argument('input', type=str)
 parser.add_argument('output', type=str)
+parser.add_argument('--type', type=str)
 args = parser.parse_args()
 
 # Read dataset
@@ -29,7 +30,9 @@ with open(args.output, 'w') as f:
     for i in dataset:
     	if i['answer'] == 'yes' or i['answer'] == 'no':
     		continue
-    	question = i['question']
-    	answer = [i['answer']]
-    	f.write(json.dumps({'question': question, 'answer': answer}))
-    	f.write('\n')
+    	if i['type'] == args.type:
+    	    question = i['question']
+    	    answer = [i['answer']]
+    	    f.write(json.dumps({'question': question, 'answer': answer}))
+    	    f.write('\n')
+    print('{t} qustions done!!'.format(t=args.type))
