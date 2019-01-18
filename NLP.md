@@ -37,7 +37,7 @@
 9. **Coreference Resolution**：共指消解，人类的语言很复杂，但在使用过程中却是倾向于简化和省略的。比如他，它，这个，那个，前者，后者…这种指代的词，再比如缩写简称，北京大学通常称为北大，中华人民共和国通常就叫中国。这种现象，被称为共指现象。在特定语境下人类可以毫不费力的区别出它这个字，到底指的是牛，还是手机。但是计算机需要通过共指消解才能知道下面这句话
 
 ## Information Retrieval
-- TF-IDF：一个容易想到的思路，就是找到出现次数最多的词。如果某个词很重要，它应该在这篇文章中多次出现。于是，我们进行"词频"（Term Frequency，缩写为TF）统计。出现次数最多的词是----"的"、"是"、"在"----这一类最常用的词。它们叫做"停用词"（stop words），表示对找到结果毫无帮助、必须过滤掉的词。用统计学语言表达，就是在词频的基础上，要对每个词分配一个"重要性"权重。最常见的词（"的"、"是"、"在"）给予最小的权重，较常见的词（"中国"）给予较小的权重，较少见的词（"蜜蜂"、"养殖"）给予较大的权重。这个权重叫做逆文档频率"（Inverse Document Frequency，缩写为IDF），它的大小与一个词的常见程度成反比。TF-IDF的优点是简单快速，而且容易理解。缺点是有时候用词频来衡量文章中的一个词的重要性不够全面，有时候重要的词出现的可能不够多，而且这种计算无法体现位置信息，无法体现词在上下文的重要性。如果要体现词的上下文结构，那么你可能需要使用word2vec算法来支持。
+- TF-IDF：一个容易想到的思路，就是找到出现次数最多的词。如果某个词很重要，它应该在这篇文章中多次出现。于是，我们进行"词频"（Term Frequency，缩写为TF）统计。出现次数最多的词是----"的"、"是"、"在"----这一类最常用的词。它们叫做"停用词"（stop words），表示对找到结果毫无帮助、必须过滤掉的词。用统计学语言表达，就是在词频的基础上，要对每个词分配一个"重要性"权重。最常见的词（"的"、"是"、"在"）给予最小的权重，较常见的词（"中国"）给予较小的权重，较少见的词（"蜜蜂"、"养殖"）给予较大的权重。这个权重叫做逆文档频率"（Inverse Document Frequency，缩写为IDF），它的大小与一个词的常见程度成反比。TF-IDF的优点是简单快速，而且容易理解。缺点是有时候用词频来衡量文章中的一个词的重要性不够全面，有时候重要的词出现的可能不够多，而且这种计算无法体现位置信息，无法体现词在上下文的重要性。如果要体现词的上下文结构，那么你可能需要使用word2vec算法来支持。另外的就是，TF-IDF中文档是用weighted Bag of words来表示，这里的weighted就是指TF和IDF的乘积，文档由该文档中出现的词来表示，优点是简单有效，缺点是无法从词袋表示来恢复原文档以及它忽略了词之间和句法关系以及篇章结构的信息。
 ```
 TF = 某个词在文章中出现的次数 / 文章的总词数
 IDF = log(语料库的文档总数 / 包含该词的文档数+1)
@@ -49,3 +49,24 @@ TF-IDF = TF * IDF
     - **Representation-based models**: Representation-based models construct a fixed-dimensional vector representation for each text separately and then perform matching within the latent space. (DSSM, CDSSM, ARC-I)
     - **Interaction-based models**: Interaction-based models compute the interaction between each individual term of both texts. An interaction can be identity or syntactic/semantic similarity. The interaction matrix is subsequently summarized into a matching score. (DRMM, MatchPyramid, Match-SRNN, K-NRM)
     - **Hybrid models**: Hybrid models consist of (i) a representation component that combines a sequence of words (e.g., a whole text, a window of words) into a fixed-dimensional representation and (ii) an interaction component. These two components can occur (1) in serial or (2) in parallel. (ARC-II, MV-LSTM, Duet, DeepRank)
+- **信息检索评价**：衡量检索结果与标准答案的一致性
+    - 对 Unranked Retrieval(非排序检索)的评价
+        - P@k (precision at k)
+        - R@k (Recall at k)
+        - F1
+    - 对 Ranked Retrieval(排序结果)的评价，考虑相关文档在检索结果中的排序位置，考虑在不同 recall levels 的 precision 值
+        - AP and MAP
+        - MRR (P@k1, Mean Reciprocal Rank)
+        - nDCG (Normalized Discounted Cumulative Gain)
+- **DSSM**: 
+![](./figures/DSSM.png)
+![](./figures.DSSM_illustration.png)
+    - latent semantic models with a deep structure that project queries and documents into a common low-dimensional space
+    - relevance of a document given a query is readily computed as the distance between them
+    - word hashing method, through which the high-dimensional term vectors of queries or documents are projected to low-dimensional letter based n-gram vectors with little information loss
+    - The input (raw text features) to the DNN is a highdimensional term vector, e.g., raw counts of terms in a query or a document without normalization, and the output of the DNN is a concept vector in a low-dimensional semantic feature space
+    - Compared with the original size of the one-hot vector, word hashing allows us to represent a query or a document using a vector with much lower dimensionality. Take the 40Kword vocabulary as an example. Each word can be represented by a 10,306-dimentional vector using letter trigrams, giving a fourfold dimensionality reduction with few collisions. For instance, "good" >>> [0,0,0,...1,0,0,...] with size of 500K ===>> #go, goo, ood, od# >>> [0,1,1,...1,....] with size of 30,621
+- **C-DSSM**: 
+![](./figures/C-DSSM.png)
+    - C-DSSM has a convolutional layer that projects each word within a context window to a local contextual feature vector. Semantically similar words-withincontext are projected to vectors that are close to each other in the contextual feature space.
+    - the overall semantic meaning of a sentence is often determined by a few key words in the sentence, thus, simply mixing all words together (e.g., by summing over all local feature vectors) may introduce unnecessary divergence and hurt the effectiveness of the overall semantic representation. Therefore, C-DSSM uses a max pooling layer to extract the most salient local features to form a fixed-length global feature vector.
