@@ -60,7 +60,7 @@ TF-IDF = TF * IDF
         - nDCG (Normalized Discounted Cumulative Gain)
 - **DSSM**: 
 ![](./figures/DSSM.png)
-![](./figures.DSSM_illustration.png)
+![](./figures/DSSM_illustration.png)
     - latent semantic models with a deep structure that project queries and documents into a common low-dimensional space
     - relevance of a document given a query is readily computed as the distance between them
     - word hashing method, through which the high-dimensional term vectors of queries or documents are projected to low-dimensional letter based n-gram vectors with little information loss
