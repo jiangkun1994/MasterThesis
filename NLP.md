@@ -24,6 +24,7 @@
     - 分类任务：文本分类，情感分析
     - 句子关系判断：自然语言推理，深度文本匹配，问答系统
     - 生成式任务：机器翻译，文本摘要生成
+- **[BiLSTM](https://zhuanlan.zhihu.com/p/47802053)**
 
 ## NLP Pipeline
 1. **Sentence Segmentation**：断句，句子切分
@@ -58,6 +59,7 @@ TF-IDF = TF * IDF
         - AP and MAP
         - MRR (P@k1, Mean Reciprocal Rank)
         - nDCG (Normalized Discounted Cumulative Gain)
+- **语义匹配**：例如在搜索中，同样想知道iPhone手机的价格，两个query:“iphone多少钱”和“苹果手机什么价格”，这两个query的意思是完全一样的，但是字面上没有任何的重叠，用bm25和tfidf来计算，他们的相似度都是0。语义匹配就是要解决这种字面上不一定重叠，但是语义层面是相似的文本匹配问题。
 - **DSSM**: 
 ![](./figures/DSSM.png)
 ![](./figures/DSSM_illustration.png)
@@ -66,7 +68,29 @@ TF-IDF = TF * IDF
     - word hashing method, through which the high-dimensional term vectors of queries or documents are projected to low-dimensional letter based n-gram vectors with little information loss
     - The input (raw text features) to the DNN is a highdimensional term vector, e.g., raw counts of terms in a query or a document without normalization, and the output of the DNN is a concept vector in a low-dimensional semantic feature space
     - Compared with the original size of the one-hot vector, word hashing allows us to represent a query or a document using a vector with much lower dimensionality. Take the 40Kword vocabulary as an example. Each word can be represented by a 10,306-dimentional vector using letter trigrams, giving a fourfold dimensionality reduction with few collisions. For instance, "good" >>> [0,0,0,...1,0,0,...] with size of 500K ===>> #go, goo, ood, od# >>> [0,1,1,...1,....] with size of 30,621
+    - 使用bag of letter-trigrams的好处：
+        - 减少字典的大小，#words 500K -> letter-trigram: 30K
+        - 处理out of vocabulary的问题，对于训练数据中没出现的单词也可以处理，提高了泛化性
+        - 对于拼写错误也有一定的鲁棒性
+    - DSSM的缺点：
+        - 词袋模型，失去了词序信息
+        - point-wise的loss（相关文档为1,不相关文档为0,而不是一个匹配程度），和排序任务match度不够高。可以轻松的扩展到pair-wise的loss，这样和排序任务更相关。
+- **获取词序信息**：
+    - CNN
+![](./figures/CNN.png)
+    - RNN
+![](figures/RNN.png)
 - **C-DSSM**: 
 ![](./figures/C-DSSM.png)
     - C-DSSM has a convolutional layer that projects each word within a context window to a local contextual feature vector. Semantically similar words-withincontext are projected to vectors that are close to each other in the contextual feature space.
     - the overall semantic meaning of a sentence is often determined by a few key words in the sentence, thus, simply mixing all words together (e.g., by summing over all local feature vectors) may introduce unnecessary divergence and hurt the effectiveness of the overall semantic representation. Therefore, C-DSSM uses a max pooling layer to extract the most salient local features to form a fixed-length global feature vector.
+- **ARC-I**:
+![](./figures/ARC-1.png)
+![](./figures/ARC-2.png)
+    - we devise novel deep convolutional network architectures that can naturally combine 1) the hierarchical sentence modeling through layer-by-layer composition and pooling, and 2) the capturing of the rich matching patterns at different levels of abstraction
+![](./figures/ARC-3.png)
+    -  Although ARC-I enjoys the flexibility brought by the convolutional sentence model, it suffers from a drawback inherited from the Siamese architecture: it defers the interaction between two sentences (in the final MLP) to until their individual representation matures (in the convolution model), therefore runs at the risk of losing details (e.g., a city name) important for the matching task in representing the sentences
+![](figures/ARC-4.png)
+![](./figures/ARC-5.png)
+    - In view of the drawback of Architecture-I, we propose Architecture-II (ARC-II) that is built directly on the interaction space between two sentences. It has the desirable property of letting two sentences meet before their own high-level representations mature, while still retaining the space for the individual development of abstraction of each sentence
+- **[搜索与推荐中的深度学习匹配](https://zhuanlan.zhihu.com/p/38296950)**

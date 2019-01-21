@@ -13,6 +13,8 @@
 - FileZilla上传文件至GCE：[Google Cloud FTP Setup with FileZilla ](https://www.onepagezen.com/google-cloud-ftp-filezilla-quick-start/)。Windows下该key文件在E盘的putty文件夹里的key1，用户名为rsa-key-20190114。
 - Hash：一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
 - [T检验](https://blog.csdn.net/shulixu/article/details/53354206);[T检验](https://blog.csdn.net/u011331731/article/details/72858416)
+ - **true positive, true negative, false positive, false negative**
+ ![](./figures/metric.png)
 
 ### HotpotQA
 - **测试集**：对于该数据集的Test set in the fullwiki setting，该测试集只包含了question和basic IR model检索出来的对应每个问题的paragraphs，并没有答案和相对应的supporting facts，因此只需要用改进后的IR model检索出来的paragraphs来代替之前的paragraphs后，对测试集里的问题的答案和supporting facts进行预测，将结果上传到作者提供的evaluation server即可。
@@ -42,3 +44,13 @@ for line in open('./SQuAD-v1.1-train.json'):
 3. Implement the IR model(s) (deep or not) that your determined to be the right one(s) to use in (2)
 4. Analyze whether the used model reduces some of those errors - it should if steps (1)-(3) have been done correctly
 5. Propose an adaptation to the model of (3) to also improve its performance in at least in error category that the current model is not good at
+
+### Feedback
+- **Research Proposal**: 
+    - one step at a time. You can already write your proposal up as part of the introduction - section 2.2 certainly belongs into the introduction, as an easy motivation for your work.
+- **Types of Questions and Errors**:  
+    - so, this initial analysis is already looking good you can definitely use it as motivation for your thesis work
+    - For Section 3 you should have a more principled writeup e.g. you sample 100 non-top-5 queries and determine the PERCENTAGE of each error category right now, it is still not clear what the prevalent issue is. you found some issues, but does each of those occur once in 100 example or in 90 out of the 100 failures? this is an important difference
+    - for completeness, the TF.IDF model should also be explained - right now it is not on a level that allows someone to reproduce the results
+    - and overall, i would like to see a short discussion of what the top-5 performance means - for an IR task, this is actually pretty good i would say (though it depends of course how many items have to be ranked per question)
+    - but you are on the right track and all of this content is usable for the thesis
