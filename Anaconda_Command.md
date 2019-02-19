@@ -8,7 +8,7 @@
 - 在 Windows 上，你可以使用 activate my_env进入，deactivate退出。在 OSX/Linux 上使用 source activate my_env 进入环境，source deactivate退出。
 - conda env export > environment.yaml：将你当前的环境保存到当前终端路径下的YAML文件里（包括Pyhton版本和所有包的名称）。
 - 导出的环境文件，在其他电脑环境中如何使用呢？首先在conda中进入你的环境，比如activate py3，然后#其中-f表示你要导出文件在本地的路径，所以/path/to/environment.yml要换成你本地的实际路径
-conda env update -f=/path/to/environment.yml
+conda env update -f=/path/to/environment.yml。也可以不用进入某个环境，直接输入导入环境文件的命令即可。
 - 对于不使用 conda 的用户，还可以使用 pip freeze > environment.txt 将一个 txt文件导出并包括在其中。pip install -r /path/requirements.txt来导入该环境。
 - conda env list：可以列出你创建的所有环境
 - conda env remove -n env_name：删除指定的环境（在这里环境名为 env_name）

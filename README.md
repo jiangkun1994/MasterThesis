@@ -15,12 +15,42 @@
 - [T检验](https://blog.csdn.net/shulixu/article/details/53354206);[T检验](https://blog.csdn.net/u011331731/article/details/72858416)
  - **true positive, true negative, false positive, false negative**
  ![](./figures/metric.png)
+ - **import argparse**
+ ```
+ import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--square-file", help="display a square of a given number", type=int)
+parser.add_argument("--cubic-file", help="display a cubic of a given number", type=int)
+args = parser.parse_args()
+if args.square_file:
+        print(args.square_file**2)
+if args.cubic_file:
+        print(args.cubic_file**3)
+
+
+>>>
+(HotpotQA) jiangkun@xixi:~/test$ python args.py -h
+usage: args.py [-h] [--square-file SQUARE_FILE] [--cubic-file CUBIC_FILE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --square-file SQUARE_FILE
+                        display a square of a given number
+  --cubic-file CUBIC_FILE
+                        display a cubic of a given number
+
+ ```
 
 ### HotpotQA
 - **测试集**：对于该数据集的Test set in the fullwiki setting，该测试集只包含了question和basic IR model检索出来的对应每个问题的paragraphs，并没有答案和相对应的supporting facts，因此只需要用改进后的IR model检索出来的paragraphs来代替之前的paragraphs后，对测试集里的问题的答案和supporting facts进行预测，将结果上传到作者提供的evaluation server即可。
 - **JSON Format**：[{_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:}, {_id:, question:, answer:, supporting_facts:, context:} .......]
 - **Supporting Facts**：[[title, sent_id], [title, sent_id], [title, sent_id] ........]
 - **Context**：[[title, sentences], [title, sentences], [title, sentences] ......]，其中，sentences = [string1, string2, string3, ......]
+- The QA pairs from dev set in distractor and fullwiki setting are the same. The only difference between them is the context. Distractor setting has gold paragraphs in 10 paragraphs, while fullwiki setting may or may not have them, because the paragraphs come from the basic IR system.
+- Dev set in distractor setting and fullwiki setting both have supporting facts, so we could know which document is related to the question. So the dataset from HotpotQA can be used for training neural IR model.
+- **??? why training set also has irrelated context which are used for training Reading Comprehension model?**
+- HotpotQA dataset can have another metric for IR model which is [Success@k](https://arxiv.org/pdf/1808.10628.pdf).
 
 - **利用DrQA里的TF-IDF model对来自HotpotQA和SQuAD进行检索测试**:
 数据格式脚本见[这里](./scripts/DrQA_eval_txt.py)
@@ -35,7 +65,7 @@ with open('./SQuAD-v1.1-train.json') as f:
     dataset = json.load(f)
 
 for line in open('./SQuAD-v1.1-train.json'):
-    dataset = json.loads(line)
+    dataset = json.loads(line) # SQuAD.json只有一行，所以用这个方法生成的数据也只有一行
 ```
 
 ### Research Questions
