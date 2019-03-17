@@ -3,7 +3,7 @@
 - 将安装好的cuda8与导入的pytorch成功运行：export LD_LIBRARY_PATH=/home/jiangkun/anaconda3/pkgs/cudatoolkit-8.0-1/lib（可以先用find / -name libcudart.so.8.0找到路径）
 - 在windows利用anaconda安装tensorflow时，只能建立在python3.x的版本上，因此python2版本在windows上无法安装tensorflow
 - [配置谷歌云计算平台GCE](https://zhuanlan.zhihu.com/p/33099231)，[本地ubuntu连接GCE](https://www.jianshu.com/p/57e85cf3e50b)
-- [Stanford CoreNLP在ubuntu下的安装与使用](https://blog.csdn.net/Hay54/article/details/82313535)，安装好java环境之后，将相关jar文件添加入CLASSPATH即可
+- [Stanford CoreNLP在ubuntu下的安装与使用](https://blog.csdn.net/Hay54/article/details/82313535)，安装好java环境之后，将相关jar文件添加入CLASSPATH即可`export CLASSPATH=/home/jiangkunxixi/DrQA/corenlp/*`
 - **np.sum(a, axis=0, keepdims=True)**：axis=0是指X轴，即矩阵a的每一列的和，而axis=1则指Y轴，即矩阵a每一行的和。keepdims=True表示做完和以后，结果依然保持原来的矩阵格式，不会变成np.array这样形式的数组
 - **np.random.rand vs np.random.randn**：前者数值服从均匀分布，后者数值服从正态分布
 - **显卡**：（GPU）主流是Nvidia的GPU，深度学习本身需要大量计算。GPU的并行计算能力，在过去几年里恰当地满足了深度学习的需求。AMD的GPU基本没有什么支持，可以不用考虑。

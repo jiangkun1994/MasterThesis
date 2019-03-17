@@ -25,6 +25,7 @@
     - 句子关系判断：自然语言推理，深度文本匹配，问答系统
     - 生成式任务：机器翻译，文本摘要生成
 - **[BiLSTM](https://zhuanlan.zhihu.com/p/47802053)**
+- [NLP中的深度学习技术](https://zhuanlan.zhihu.com/p/57979184)
 
 ## NLP Pipeline
 1. **Sentence Segmentation**：断句，句子切分
@@ -50,14 +51,14 @@ TF-IDF = TF * IDF
     - **Representation-based models**: Representation-based models construct a fixed-dimensional vector representation for each text separately and then perform matching within the latent space. (DSSM, CDSSM, ARC-I)
     - **Interaction-based models**: Interaction-based models compute the interaction between each individual term of both texts. An interaction can be identity or syntactic/semantic similarity. The interaction matrix is subsequently summarized into a matching score. (DRMM, MatchPyramid, Match-SRNN, K-NRM)
     - **Hybrid models**: Hybrid models consist of (i) a representation component that combines a sequence of words (e.g., a whole text, a window of words) into a fixed-dimensional representation and (ii) an interaction component. These two components can occur (1) in serial or (2) in parallel. (ARC-II, MV-LSTM, Duet, DeepRank)
-- **信息检索评价**：衡量检索结果与标准答案的一致性
+- [**信息检索评价**](https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval))：衡量检索结果与标准答案的一致性
     - 对 Unranked Retrieval(非排序检索)的评价
         - P@k (precision at k)
         - R@k (Recall at k)
         - F1
     - 对 Ranked Retrieval(排序结果)的评价，考虑相关文档在检索结果中的排序位置，考虑在不同 recall levels 的 precision 值
         - AP and MAP
-        - MRR (P@k1, Mean Reciprocal Rank)
+        - [MRR](https://en.wikipedia.org/wiki/Mean_reciprocal_rank)
         - nDCG (Normalized Discounted Cumulative Gain)
 - **语义匹配**：例如在搜索中，同样想知道iPhone手机的价格，两个query:“iphone多少钱”和“苹果手机什么价格”，这两个query的意思是完全一样的，但是字面上没有任何的重叠，用bm25和tfidf来计算，他们的相似度都是0。语义匹配就是要解决这种字面上不一定重叠，但是语义层面是相似的文本匹配问题。
 - **DSSM**: 
