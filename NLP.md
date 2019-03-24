@@ -95,3 +95,8 @@ TF-IDF = TF * IDF
 ![](./figures/ARC-5.png)
     - In view of the drawback of Architecture-I, we propose Architecture-II (ARC-II) that is built directly on the interaction space between two sentences. It has the desirable property of letting two sentences meet before their own high-level representations mature, while still retaining the space for the individual development of abstraction of each sentence
 - **[搜索与推荐中的深度学习匹配](https://zhuanlan.zhihu.com/p/38296950)**
+- **Ad-hoc retrieval**: Ad-hoc retrieval is a classic retrieval task in which the user specifies his/her information need through a query which initiates a search (executed by the information system) for documents that are likely to be relevant to the user.
+    - A major characteristic of ad-hoc retrieval is the heterogeneity of the query and the documents.
+    - The query comes from a search user with potentially unclear intent and is usually very short, ranging from a few words to a few sentences.
+    - The documents are typically from a different set of authors and have longer text length, ranging from multiple sentences to many paragraphs. Such heterogeneity leads to the **critical vocabulary mismatch problem**. Vocabulary mismatch means the terms between the questions and relevant documents are different but having the same semantic and these relevant documents cannot be retrieved successfully.
+    -  Semantic matching, meaning matching words and phrases with similar meanings, could alleviate the problem, but exact matching is indispensable especially with rare terms.
