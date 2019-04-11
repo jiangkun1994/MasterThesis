@@ -26,6 +26,7 @@
     - 生成式任务：机器翻译，文本摘要生成
 - **[BiLSTM](https://zhuanlan.zhihu.com/p/47802053)**
 - [NLP中的深度学习技术](https://zhuanlan.zhihu.com/p/57979184)
+- **Cos Similarity VS Dot Product**: Cosine similarity only cares about angle difference, while dot product cares about angle and magnitude. If you normalize your data to have the same magnitude, the two are indistinguishable. Sometimes it is desirable to ignore the magnitude, hence cosine similarity is nice, but if magnitude plays a role, dot product would be better as a similarity measure. Note that neither of them is a "distance metric".
 
 ## NLP Pipeline
 1. **Sentence Segmentation**：断句，句子切分
