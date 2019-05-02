@@ -16,3 +16,4 @@ y  复制选中内容到0号寄存器
 "+y  复制选中内容到＋寄存器，也就是系统的剪贴板，供其他程序用 
 - chown username filename：修改文件filename的拥有权限为用户username
 - export: Linux export命令用于设置或显示环境变量。export -p 列出所有的shell赋予程序的环境变量。export SQUAD_DIR=/home/jiangkun/MasterThesis/pytorch-pretrained-BERT/squad/后则可用cd $SQUAD_DIR 直接打开该对应的目录。
+- echo：echo "text" >> file.txt， 将text输出到file.txt里。不加输出路径的话，默认为输出到terminal上。

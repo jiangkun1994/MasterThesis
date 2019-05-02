@@ -25,36 +25,45 @@ def exact_match_score(prediction, ground_truth):
     """Check if the prediction is a (soft) exact match with the ground truth."""
     return normalize_answer(prediction) == normalize_answer(ground_truth)
 
-test = []
-for each_test in open('/home/jiangkun/MasterThesis/ParagraphRanker/prediction/check-semantic/SQuAD-v1.1-dev-500-doc-default-pipeline.preds'):
-	test_data = json.loads(each_test)
-	if test_data == []:
-		test_data = 'aklsjdwilasd'
-	else:
-		test_data = test_data[0]['span']
-	test.append(test_data)
+n_paras = 101
+ems = []
+while True:
+	test = []
+	for each_test in open('/home/jiangkun/MasterThesis/ParagraphRanker/ranker-trained-combined/re-rank/pred_' + str(n_paras) + 'para-squad.json'):
+		test_data = json.loads(each_test)
+		if test_data == []:
+			test_data = 'aklsjdwilasd'
+		else:
+			test_data = test_data[0]['span']
+		test.append(test_data)
 
 
-truth = []
-for each_truth in open('/home/jiangkun/MasterThesis/DrQA/SQuAD-v1.1-dev-500-doc.txt'): ###### triviaQA-dev-500-doc  SQuAD-v1.1-dev-500-doc  hotpot_dev_distractor_v1_cp-500-doc
-	truth_data = json.loads(each_truth)
-	truth.append(truth_data['answer'])
+	truth = []
+	for each_truth in open('/home/jiangkun/MasterThesis/DrQA/SQuAD-v1.1-dev-500-doc.txt'): ###### triviaQA-dev-500-doc  SQuAD-v1.1-dev-500-doc  hotpot_dev_distractor_v1_cp-500-doc
+		truth_data = json.loads(each_truth)
+		truth.append(truth_data['answer'])
 
 
-exact_match = []
-for i, j in enumerate(test):
-	for each_idx, each_ground in enumerate(truth[i]):
-		truth[i][each_idx] = normalize_answer(truth[i][each_idx])
-	if normalize_answer(j) in truth[i]:
-		exact_match.append(1)
-	else:
-		exact_match.append(0)
+	exact_match = []
+	for i, j in enumerate(test):
+		for each_idx, each_ground in enumerate(truth[i]):
+			truth[i][each_idx] = normalize_answer(truth[i][each_idx])
+		if normalize_answer(j) in truth[i]:
+			exact_match.append(1)
+		else:
+			exact_match.append(0)
 
-print('EM: ', sum(exact_match) / len(exact_match))
-print('length of exact_match: ', len(exact_match))
-print(sum(exact_match))
-print(exact_match)
+	print('EM: ', sum(exact_match) / len(exact_match))
+	print('length of exact_match: ', len(exact_match))
+	print(sum(exact_match))
+	# print(exact_match)
+	ems.append(sum(exact_match) / len(exact_match))
+	n_paras += 5
+	if n_paras > 200:
+		break
 
+with open('/home/jiangkun/MasterThesis/ParagraphRanker/ranker-trained-combined/exact-match.txt', 'a') as f:
+	f.write(json.dumps(ems) + '\n')
 
 
 

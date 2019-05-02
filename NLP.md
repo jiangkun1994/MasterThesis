@@ -12,7 +12,7 @@
 - **word2vec**：其实就是把单词表示成固定维度的稠密的向量。word2vec 有两种常用的数据准备方式：CBOW (continuous bag of words)，用前后词（context words）预测目标词（target word）。skip-gram，用目标词（target word）预测前后词（context word）。word2vec 并不关心相邻单词之前一起出现的频数，而是仅仅关心，这个单词是不是属于另一个单词的上下文(context)!也就是说，word2vec 不关心根据这个词预测出的下一个词语是什么，而是只关心这两个词语之间是不是有上下文关系。于是，word2vec 需要的仅仅是一个二分类器：“这个单词是另一个单词的上下文单词吗？”
 所以，要训练一个 word2vec模型，我们其实是在训练一个二分类器。而二分类器，你肯定很容易就想到了 Logistic Regression。实际情况，skip-gram 用的比较多，因为有一个说法，CBOW 模型在小的数据集上面表现不错，在大的数据集里，skip-gram表现更好。word2vec的输出层是softmax，因此对于CBOW，则输出各个word是target word的概率，结合训练集的标注便可以训练这些输入的context word的weights，而这些weights，就是输入词的vector。同理，skip-gram输出层输出的是各个word是它context word的概率，此时weight向量就是输入词的向量。因此，word2vec可以平均这两个模型输出的结果，得到更准确的vector。
 - **BLEU**：BLEU (bilingual evaluation understudy) is an algorithm for evaluating the quality of text which has been machine-translated from one natural language to another.
-- **Negative Sampling**：in terms of skip-gram model with negative sampling, train binary logistic regressions for a true	pair (center word and word in its context window) versus a couple of noise pairs (the center word paired with a random word)
+- **Negative Sampling**：in terms of skip-gram model with negative sampling, train binary logistic regressions for a true	pair (center word and word in its context window) versus a couple of noise pairs (the center word paired with a random word) 负采样可以加速损失函数的减少，从而加速训练速度。负采样主要用于正样本远小于负样本的情况，因此在训练中提供的样本大概率是负样本，因此将损失函数里负样本的数量只需要采样几个负样本计算它们的概率分布来代表所有的负样本的概率分布。
 - 在实践中，如果领域的数据非常少，我们可能直接用在其它任务中Pretraining 的Embedding并且fix住它；而如果领域数据较多的时候我们会用Pretraining 的Embedding 作为初始值，然后用领域数据驱动它进行微调。
 - **Language Model**：语言模型就是指一个模型能基于之前出现的序列信息去预测下一个可能生成的信息。
 - **准确率p**：预测对的数 / 预测出来的总数

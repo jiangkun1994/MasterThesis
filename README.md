@@ -9,7 +9,7 @@
 - **np.random.rand vs np.random.randn**：前者数值服从均匀分布，后者数值服从正态分布
 - **显卡**：（GPU）主流是Nvidia的GPU，深度学习本身需要大量计算。GPU的并行计算能力，在过去几年里恰当地满足了深度学习的需求。AMD的GPU基本没有什么支持，可以不用考虑。
 - **驱动**：没有显卡驱动，就不能识别GPU硬件，不能调用其计算资源。
-- **CUDA**：是Nvidia推出的只能用于自家GPU的并行计算框架。只有安装这个框架才能够进行复杂的并行计算。主流的深度学习框架也都是基于CUDA进行GPU并行加速的，几乎无一例外。还有一个叫做cudnn，是针对深度卷积神经网络的加速库。
+- **CUDA**：是Nvidia推出的只能用于自家GPU的并行计算框架。只有安装这个框架才能够进行复杂的并行计算。安装CUDA的同时也安装了能识别GPU硬件，调用其计算资源的driver。主流的深度学习框架也都是基于CUDA进行GPU并行加速的，几乎无一例外。还有一个叫做cudnn，是针对深度卷积神经网络的加速库。
 - `urllib.error.URLError: <urlopen error [Errno -3] Temporary failure in name r`：解决办法，在程序开始加上：`from urllib.request import urlopen`
 - FileZilla上传文件至GCE：[Google Cloud FTP Setup with FileZilla ](https://www.onepagezen.com/google-cloud-ftp-filezilla-quick-start/)。Windows下该key文件在E盘的putty文件夹里的key1，用户名为rsa-key-20190114。
 - Hash：一般翻译做“散列”，也有直接音译为“哈希”的，就是把任意长度的输入（又叫做预映射， pre-image），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
