@@ -333,4 +333,83 @@ large-scale KB (Bollacker et al., 2008; Auer et al.,
 2007) and a text corpus are available, but neither
 is sufficient alone for answering all questions.
 
-我们发现Open-domain QA慢慢引起大家重视和兴趣是因为现在传统的问答任务的模型表现越来越好了，所以大家想结合信息检索和传统问答两个技术来研究open-domain QA，使得问答任务变得更具有普遍性和易使用性，因为此时不需要给予模型包含所有能回答上问题的推理信息的阅读材料。然而，信息检索在open-domain QA上导致问答并没有传统的问答任务的模型效果好，因为如今要么是许多open-domain QA dataset是经由search engine检索出来的文章或者是利用传统的IR技术在大范围材料中进行检索，而这些检索出来的文章有可能包含能回答上问题的答案和信息，也有可能不包含，所以这样的传统IR模型依然欠缺精确检索和问题相关的材料的能力。如今，也有很多工作对IR进行了研究，比如利用不同的方法增加了neural ranker或者是多重传统IR模型结合或者是利用强化学习和多任务学习等技术加强IR部分，表现都有所上升。但是，这些研究没有先对根本的问题进行研究，也就是如今在open-domain QA使用的传统IR模型之后做了很多工作加强表现，但是模型主要是因为哪些种类的问题才导致表现差，原因又是什么，这些因素目前没有文章去研究。如果能尽量准确、全面和详细的考察不同种类的问题对IR模型的影响，同时挖掘IR模型主要在哪些问题下表现不好的原因，可能会对之后对模型的研究和改善有帮助，因为找到了主要导致IR模型表现差的问题类型以及原因，之后在技术的改善上也有了针对性，便可以大幅度的去提升整个open-domain QA里IR部分的表现，使得整体表现更好。
+### [SearchQA: A New Q&A Dataset Augmented with Context from a Search Engine](https://arxiv.org/pdf/1704.05179.pdf)
+- Let us first take a step back, and ask what a full
+end-to-end pipeline for question-answering would
+look like. A general question-answering system
+would be able to answer a question about any domain, based on the world knowledge. This system
+would consist of three stages. A given question is
+read and reformulated in the first stage, followed
+by information retrieval via a search engine. An
+answer is then synthesized based on the query and
+a set of retrieved documents.
+- We notice a gap between the existing closedworld question-answering data sets and this conceptual picture of a general question-answering
+system. The general question-answering system
+must deal with a noisy set of retrieved documents,
+which likely consist of many irrelevant documents as well as semantically and syntactically illformed documents. On the other hand, most of the
+existing closed-world question-answering datasets
+were constructed in a way that the context provided for each question is guaranteed relevant and
+well-written. This guarantee comes from the fact
+that each question-answer-context tuple was generated starting from the context from which the
+question and answer were extracted.
+- we start by
+building a set of question-answer pairs from Jeopardy!. We augment each question-answer pair,
+which does not have any context attached to it,
+by querying Google with the question. This process enables us to retrieve a realistic set of relevant/irrelevant documents, or more specifically
+their snippets.
+
+### [TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension](https://arxiv.org/pdf/1705.03551.pdf)
+- Our evidence
+documents are automatically gathered from either
+Wikipedia or more general Web search results (details in Section 3). Because we gather evidence
+using an automated process, the documents are
+not guaranteed to contain all facts needed to answer the question. Therefore, they are best seen
+as a source of distant supervision, based on the
+assumption that the presence of the answer string
+in an evidence document implies that the document does answer the question.3 Section 4 shows
+that this assumption is valid over 75% of the time,
+making evidence documents a strong source of
+distant supervision for training machine reading
+systems
+- Wikipedia pages for entities mentioned in the
+question often provide useful information. Wikipedia entities mentioned in the question, and
+added the corresponding pages as evidence documents.
+- About 73.5%
+of these questions contain phrases that describe a
+fine grained category to which the answer belongs,
+while 15.5% hint at a coarse grained category (one
+of person, organization, location, and miscellaneous).
+-  Question-evidence pairs in TriviaQA display more lexical and syntactic variance
+than SQuAD. This supports our earlier assertion
+that decoupling question generation from evidence
+collection results in a more challenging problem
+- The poor performance of the
+random entity baseline shows that the task is not
+already solved by information retrieval.
+- This suggests that longer compositional questions are harder for current methods
+- We randomly
+sampled 100 incorrect BiDAF predictions from
+the development set and used Wikipedia evidence
+documents for manual analysis. We found that 19
+examples lacked evidence in any of the provided
+documents, 3 had incorrect ground truth, and 3
+were valid answers that were not included in the
+answer key. Furthermore, 12 predictions were partially correct (Napoleonic vs Napoleonic Wars)
+- The first two rows suggest that long and noisy
+documents make the question answering task
+more difficult, as compared for example to the
+short passages in SQuAD
+- The crucial difference between
+SQuAD/NewsQA and TriviaQA is that TriviaQA
+questions have not been crowdsourced from preselected passages
+- Knowledge base question answering involves
+converting natural language questions to logical
+forms that can be executed over a KB. Proposed
+datasets (Cai and Yates, 2013; Berant et al., 2013;
+Bordes et al., 2015) are either limited in scale or in
+the complexity of questions, and can only retrieve
+facts covered by the KB.
+
+我们发现Open-domain QA慢慢引起大家重视和兴趣是因为现在传统的问答任务的模型表现越来越好了，所以大家想结合信息检索和传统问答两个技术来研究open-domain QA，使得问答任务变得更具有普遍性和易使用性，因为此时不需要给予模型包含所有能回答上问题的推理信息的阅读材料。然而，信息检索在open-domain QA上导致问答并没有传统的问答任务的模型效果好，因为如今要么是许多open-domain QA dataset是经由search engine检索出来的文章或者是利用传统的IR技术在大范围材料中进行检索，而这些IR模型一个很大的优点就是检索速度非常快。但是这些检索出来的文章有可能包含能回答上问题的答案和信息，也有可能不包含，所以这样的传统IR模型的检索能力有待考究和加强。而NLP researchers普遍希望通过模型的RC能力来提高ODQA模型的整体表现，这是片面的，因为RC只是ODQA的一部分。随着不同难度的QA dataset的出现，对reading comprehension component提出的要求也越来越高，因此很多NLP researchers也关注于研究新的reading comprehension model来在这些QA dataset上取得更好的表现。但是同样的研究力度和兴趣并没有给予到IR model上，researchers往往都先从reading comprehension方面来对不同种类不同难度的questions进行突破。所以几乎没有人从IR的角度去研究这些新提出来的不同难度不同种类的question对IR的影响是什么，从而再根据研究和发现来改善如今open-domain QA里IR部分的能力。
+
+如今，也有很多工作对IR进行了研究，比如利用不同的方法增加了neural ranker或者是多重传统IR模型结合或者是利用强化学习和多任务学习等技术加强IR部分，表现都有所上升。但是，这些研究没有先对根本的问题进行研究，也就是如今在open-domain QA使用的传统IR模型之后做了很多工作加强检索效果，但是模型主要在用户提出的哪些种类的问题上表现差，原因又是什么，这些因素目前没有文章去研究。如果能尽量准确、全面和详细的考察不同种类的问题对IR模型的影响，同时挖掘IR模型主要在哪些问题下表现不好的原因，可能会对之后对IR模型的研究和改善有帮助，因为找到了主要导致IR模型表现差的问题类型以及原因，之后在技术的改善上也有了针对性，便可以大幅度的去提升整个open-domain QA里IR部分的表现，使得整体表现更好。

@@ -85,3 +85,13 @@ for line in open('./SQuAD-v1.1-train.json'):
     - for completeness, the TF.IDF model should also be explained - right now it is not on a level that allows someone to reproduce the results
     - and overall, i would like to see a short discussion of what the top-5 performance means - for an IR task, this is actually pretty good i would say (though it depends of course how many items have to be ranked per question)
     - but you are on the right track and all of this content is usable for the thesis
+
+### Datasets
+| Dataset  | Description                                                                                                                                                                                                                    |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SearchQA | uses a commercial search engine, and does not provide negative contexts not containing the answer, making research into the retrieval component difficult                                                                      |
+| QUASAR-T | Using ClueWeb09, which contains about 1 billion web pages collected between January and February 2009                                                                                                                          |
+| WIKIQA   | introduced as a largerscale dataset for the subtask of answer sentence selection, however it does not identify spans of the actual answer within the selected sentence.                                                        |
+| MOVIESQA | answer questions about movies from a background corpus of Wikipedia articles. many of these are similarly phrased and fall into one of only 13 different categories; hence, existing systems already have ∼ 85% accuracy on it |
+| MS MARCO | consists of diverse real-world queries collected from Bing search logs, however many of them not factual (bad quality), which makes their evaluation tricky                                                                                  |
+| TriviaQA | obtained using a commercial search engine, making it difficult for researchers to vary the retrieval step of the QA system in a controlled fashion                                                                             |
