@@ -61,6 +61,7 @@ TF-IDF = TF * IDF
         - AP and MAP
         - [MRR](https://en.wikipedia.org/wiki/Mean_reciprocal_rank)
         - nDCG (Normalized Discounted Cumulative Gain)
+- **[How Lucene does indexing](https://stackoverflow.com/questions/2602253/how-does-lucene-index-documents)** 
 - **语义匹配**：例如在搜索中，同样想知道iPhone手机的价格，两个query:“iphone多少钱”和“苹果手机什么价格”，这两个query的意思是完全一样的，但是字面上没有任何的重叠，用bm25和tfidf来计算，他们的相似度都是0。语义匹配就是要解决这种字面上不一定重叠，但是语义层面是相似的文本匹配问题。
 - **DSSM**: 
 ![](./figures/DSSM.png)
@@ -106,3 +107,13 @@ TF-IDF = TF * IDF
     - The ranking model's purpose is to rank, i.e. produce a permutation of items in new, unseen lists in a way which is "similar" to rankings in the training data in some sense.
     - Training data consists of queries and documents matching them together with relevance degree of each match. Training data is used by a learning algorithm to produce a ranking model which computes the relevance of documents for actual queries.
     - Typically, users expect a search query to complete in a short time (such as a few hundred milliseconds for web search), which makes it impossible to evaluate a complex ranking model on each document in the corpus, and so a two-phase scheme is used.[5] First, a small number of potentially relevant documents are identified using simpler retrieval models which permit fast query evaluation, such as the vector space model, boolean model, weighted AND,[6] or BM25. This phase is called top-k document retrieval and many heuristics were proposed in the literature to accelerate it, such as using a document's static quality score and tiered indexes.[7] In the second phase, a more accurate but computationally expensive machine-learned model is used to re-rank these documents.
+- **Index in IR**: Inverted index consists of indexing terms and indexing documents. The terms can be different forms, such as a single word or continuous two words. Also, indexing documents can be different granularities, such as section, paragraph or even sentence. In addition, indexing documents can be accompanied with some other useful information, such as term frequency.
+
+### Hyperparameter Optimization
+- In machine learning, hyperparameter optimization or tuning is the problem of choosing a set of optimal hyperparameters for a learning algorithm. A hyperparameter is a parameter whose value is used to control the learning process. By contrast, the values of other parameters (typically node weights) are learned.
+- Grid search: The traditional way of performing hyperparameter optimization has been grid search, or a parameter sweep, which is simply an exhaustive searching through a manually specified subset of the hyperparameter space of a learning algorithm. A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set[3] or evaluation on a held-out validation set. Since the parameter space of a machine learner may include real-valued or unbounded value spaces for certain parameters, manually set bounds and discretization may be necessary before applying grid search.
+- Random search: Random Search replaces the exhaustive enumeration of all combinations by selecting them randomly. This can be simply applied to the discrete setting described above, but also generalizes to continuous and mixed spaces.
+- Bayesian optimization
+- Gradient-based optimization
+- Evolutionary optimization
+- Population-based

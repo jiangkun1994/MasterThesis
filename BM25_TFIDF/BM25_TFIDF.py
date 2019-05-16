@@ -162,6 +162,7 @@ class ClassicSimilarity(Similarity):
     
     def get_idf(self, docCount, docFreqs):
         idf = 1.0 + np.log(np.divide(docCount, (docFreqs + 1.0)))
+        # print('original idf: ', idf)
         return np.square(idf, idf).T
     
     def get_coord(self, tf, idf):
@@ -174,15 +175,19 @@ class ClassicSimilarity(Similarity):
     def execute(self, query, docs):
         tf, docCount, docFreqs = self.get_tf(docs, query)
         idf = self.get_idf(docCount, docFreqs)
+        # print('idf: ', idf)
         tf = tf.sqrt()
         coord = self.get_coord(tf, idf)
         norm, avgFieldLength = self.get_norm(docs)
+        print(norm)
         queryNorm = np.divide(1.0, np.sqrt(idf.sum(axis = 0)))
         # coord * dot(tf * norm, idf * queryNorm)
-        tf = tf.multiply(norm)
+        # tf = tf.multiply(norm)
         idf = np.multiply(idf, queryNorm)
         tfidf = tf.dot(idf)
         tfidf = np.multiply(tfidf, coord)
+        print(tfidf)
+        tfidf = np.multiply(tfidf, np.divide(1.0, np.sqrt(norm))) ##########
         # print(type(tfidf))
         return tfidf ## np.matrix
 
@@ -244,13 +249,13 @@ def print_rank(docs, scores):
     # print(np.argsort(-np.asarray(scores[indices].T)[0,:])) ### minus ==> default situation is ascending, so that the largest will become the smallest and at the first position
     # print(sorted_indices)
     for rank, idx in enumerate(sorted_indices):
-        print("%d.\t%s\t%f" %(rank, doc_ids[idx], scores[idx, 0]))
+        print("%d.\t%s\t%f" %(rank, docs[idx], scores[idx, 0]))
 
 
 if __name__ == '__main__':
 
 	# Some dummies documents
-	docs = pd.Series(["Lucene\n\nAction\n\ncontinue continued", "Lucene\n\nDummies mbuy", "Managing Gigabytes", "Art  Computer Science", "Action", "Lucene way", "Managing Megabytes lucene", "Art Gaming", "Brazil\n\nBrazil (; ), officially the"])
+	docs = pd.Series(["Lucene\n\nAction\n\ncontinue continued", "Lucene\n\nDummies mbuy haha haha haha haha", "Managing Gigabytes", "Art  Computer Science", "Action", "Lucene way", "Managing Megabytes lucene", "Art Gaming", "Brazil\n\nBrazil (; ), officially the"])
 	doc_ids = pd.Series(['hehe', 'dada', 'xixi', 'meme', 'zz', 'xx', 'cc', 'vv'])
 	# bm25 = BM25()
 	# scores = bm25.score('lucene action', docs)

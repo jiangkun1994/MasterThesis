@@ -29,10 +29,15 @@ with open(args.input) as f:
 with open(args.output, 'w') as f:
     for i in dataset:
     	if i['answer'] == 'yes' or i['answer'] == 'no':
-    		continue
-    	if i['type'] == args.type:
-    	    question = i['question']
-    	    answer = [i['answer']]
-    	    f.write(json.dumps({'question': question, 'answer': answer}))
-    	    f.write('\n')
+    	   continue
+    	# if i['type'] == args.type:
+    	    # question = i['question']
+    	    # answer = [i['answer']]
+    	    # f.write(json.dumps({'question': question, 'answer': answer}))
+    	    # f.write('\n')
+        else:
+            question = i['question']
+            answer = [i['answer']]
+            f.write(json.dumps({'question': question, 'answer': answer}))
+            f.write('\n')
     print('{t} qustions done!!'.format(t=args.type))

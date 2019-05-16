@@ -95,3 +95,58 @@ for line in open('./SQuAD-v1.1-train.json'):
 | MOVIESQA | answer questions about movies from a background corpus of Wikipedia articles. many of these are similarly phrased and fall into one of only 13 different categories; hence, existing systems already have ∼ 85% accuracy on it |
 | MS MARCO | consists of diverse real-world queries collected from Bing search logs, however many of them not factual (bad quality), which makes their evaluation tricky                                                                                  |
 | TriviaQA | obtained using a commercial search engine, making it difficult for researchers to vary the retrieval step of the QA system in a controlled fashion                                                                             |
+
+- **[~QuAC~](http://quac.ai/)**: Question Answering in Context is a dataset for modeling, understanding, and participating in information seeking dialog. Data instances consist of an interactive dialog between two crowd workers: (1) a student who poses a sequence of freeform questions to learn as much as possible about a hidden Wikipedia text, and (2) a teacher who answers the questions by providing short excerpts (spans) from the text. QuAC introduces challenges not found in existing machine comprehension datasets: its questions are often more open-ended, unanswerable, or only meaningful within the dialog context.
+- **[~RACE~](https://arxiv.org/abs/1704.04683)**: Our new dataset, namely RACE, consists of
+27,933 passages and 97,687 questions. After reading each passage, each student is asked to answer
+several questions where each question is provided
+with four candidate answers – only one of them is
+correct . Unlike existing datasets, both the questions and candidate answers in RACE are not restricted to be the text spans in the original passage;
+instead, they can be described in any words.
+- **[~QAngaroo~](https://arxiv.org/abs/1710.06481)**: The first of the two datasets is open-domain and based on Wikipedia articles; the goal is to recover Wikidata information by hopping through documents. However, the question is not in natural language.
+- **[~NewsQA~](https://arxiv.org/abs/1611.09830)**: It is very similar to SQuAD, but the questions were collected based on news articles from CNN.
+- **[~MultiRC~](https://aclweb.org/anthology/papers/N/N18/N18-1023/)**: Each question is associated with several choices for answer-options, out of which one or more correctly answer the question. Each instance consists of a multi-sentence paragraph, a question, and answer-options. All instances were constructed such that it is not possible to answer a question correctly without gathering information from multiple sentences. The paragraphs in our dataset have diverse provenance by being extracted from 7 different domains such as news, fiction, historical text etc., and hence are expected to be more diverse in their contents as compared to single-domain datasets.
+- **[~MS MARCO~](https://arxiv.org/abs/1611.09268)**: The answers are human generated. The context passages from which the answers are obtained are extracted from real documents using the latest Bing search engine. Hence, I hardly can adapt my IR models like Bing search engine to doing the retrieval. Relevant passages and answers are both from sources that Bing search engine is based on. In addition, real-world queries collected from Bing search logs, however many of them not factual (bad quality), which makes their evaluation tricky [reference](https://arxiv.org/pdf/1707.03904v2.pdf)
+- **[~CoQA~](https://arxiv.org/abs/1808.07042)**:  large-scale dataset for building Conversational Question Answering systems
+-  **[~RecipeQA~](https://arxiv.org/abs/1809.00812)**: a dataset for multimodal comprehension of cooking recipes.  Each question in RecipeQA involves multiple modalities such as titles, descriptions or images, and working towards an answer requires (i) joint understanding of images and text, (ii) capturing the temporal flow of events, and (iii) making sense of procedural knowledge.
+- **[~NarrativeQA~](https://arxiv.org/pdf/1712.07040.pdf)**: we present a new
+dataset and set of tasks in which the reader
+must answer questions about stories by reading
+entire books or movie scripts. Knowledge source is not common and applicable for other datasets.
+- **[~QUASAR-T~](https://arxiv.org/pdf/1707.03904.pdf)**: The QUASAR-T dataset consists of 43000
+open-domain trivia questions and their
+answers obtained from various internet
+sources. ClueWeb09 (Callan et al., 2009)
+serves as the background corpus for extracting these answers. The knowledge source is not common. Also, the questions are similar to TriviaQA.
+- **[~SearchQA~](https://arxiv.org/pdf/1704.05179.pdf)**: we start by building a set of question-answer pairs from Jeopardy!. We augment each question-answer pair, which does not have any context attached to it, by querying Google with the question. This process enables us to retrieve a realistic set of relevant/irrelevant documents, or more specifically their snippets. Relevant passages and answers are both from sources that Google search engine is based on.
+- **[~WikiQA~](https://www.aclweb.org/anthology/D15-1237)**: introduced as a larger scale dataset for the subtask of answer sentence selection. In addition, he WikiQA dataset also includes questions for which there are no correct sentences, enabling researchers to work on answer triggering, a critical component in any QA system.
+- **[TriviaQA](https://arxiv.org/pdf/1705.03551.pdf)**: Collect evidence from Wikipedia. Most of the evidence can be used to answer questions from TriviaQA.
+- **SQuAD**: Questions were collected from Wikipedia articles, so Wikipedia contains the paragraphs can be used to answer questions.
+- **HotpotQA**: Questions were collected from Wikipedia articles, so Wikipedia contains the paragraphs can be used to answer questions.
+
+### Anserini
+- First, install some packages
+```
+  pip install --user pip --upgrade pip
+  pip install --user cython --upgrade Cython
+  pip install --user pyjnius --upgrade pyjnius
+```
+- Install open JDK8 `sudo apt-get install openjdk-8-jdk` `OracleJDK8` would be better
+- open `~/.bashrc`, (path / or java version may differ, make sure to check it before copying)
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+source ~/.bashrc
+```
+- install maven `sudo apt-get install maven`
+- `git clone https://github.com/castorini/anserini.git`
+- `cd anserini`, `mvn clean package appassembler:assemble` to download plugin according to `pom.xml`
+- Sanity check
+```
+find target/appassembler/bin/ -type f -exec sed -i 's/-Xmx.*G/-Xmx2G/g' {} \;
+git clone https://github.com/castorini/Anserini-data.git
+cd eval && tar xvfz trec_eval.9.0.4.tar.gz && cd trec_eval.9.0.4 && make && cd .. && cd ..
+python src/main/python/run_regression.py --collection cacm --index --fail_eval
+ls target | grep fatjar | xargs python src/test/python/python_interface.py
+```
+- Every change on java files, do `mvn clean package appassembler:assemble` to build project again
