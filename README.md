@@ -125,11 +125,11 @@ serves as the background corpus for extracting these answers. The knowledge sour
 - **HotpotQA**: Questions were collected from Wikipedia articles, so Wikipedia contains the paragraphs can be used to answer questions.
 
 ### Anserini
-- First, install some packages
+- First, activate environment of anacodna and install some packages
 ```
-  pip install --user pip --upgrade pip
-  pip install --user cython --upgrade Cython
-  pip install --user pyjnius --upgrade pyjnius
+  pip install Cython
+  pip install pyjnius
+  pip install pyyaml
 ```
 - Install open JDK8 `sudo apt-get install openjdk-8-jdk` `OracleJDK8` would be better
 - open `~/.bashrc`, (path / or java version may differ, make sure to check it before copying)

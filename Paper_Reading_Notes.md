@@ -436,6 +436,51 @@ tion that is found in external resources such as newswire, without any
 attempt to prove the authors correct, and also without any attempt to
 construct answers that are only implicit in the sources.
 
+###[Cognitive Graph for Multi-Hop Reading Comprehension at Scale](https://arxiv.org/pdf/1905.05460.pdf)
+- However, to cross the
+chasm of reading comprehension ability between
+machine and human, three main challenges lie
+ahead: 1) Reasoning ability. As revealed by adversarial tests (Jia and Liang, 2017), models for
+single paragraph QA tend to seek answers in sentences matched by the question, which does not
+require complex reasoning
+-  Existing QA systems based on machine comprehension generally follow retrievalextraction framework in DrQA (Chen et al., 2017),
+reducing the scope of sources to a few paragraphs
+by pre-retrieval. This framework is a simple compromise between single paragraph QA and scalable information retrieval, compared to human’s
+ability to breeze through reasoning with knowledge in massive-capacity memory (Wang et al.,
+2003).
+
+### [Xu: An Automated Query Expansion and Optimization Tool](https://arxiv.org/pdf/1808.09353v2.pdf)
+-  Sometimes the query expression may be too
+short to dictate what the user is looking for or may not be well
+formulated [5]. In most cases, the user's original query is not
+sufficient to retrieve the information that the user is looking
+for [6]. 
+- Instead of striving to create an optimal ranking algorithm,
+developers of search engines should aspire to create an
+optimal query formulation and refinement mechanism [9].
+This is where mechanisms for query optimization such as
+query suggestion and expansion can come into effect [2].
+Query Expansion (QE), which is defined as the set of
+methodologies, algorithms or techniques for refining search
+queries, is often utilized for the purpose of retrieving more
+relevant results [10]. QE tries to improve search and IR by
+analyzing the relationships between the terms or words in a
+query, and other words in a lexical database such as Wordnet
+[11] in order to find potentially related words so that the
+original query is better represented [8].
+
+### [MULTI-TASK LEARNING FOR DOCUMENT RANKING AND QUERY SUGGESTION](https://openreview.net/pdf?id=SJ1nzBeA-)
+- Traditional retrieval models such as query likelihood (Ponte & Croft, 1998) and
+BM25 (Robertson et al., 2009) are based on exact matching of query and document words with a
+variety of smoothing, weighting and normalization techniques. Recently, deep neural network based
+approaches demonstrate strong advance in ad-hoc retrieval. Existing neural ranking models fall into
+two categories: representation focused (Huang et al., 2013; Gao et al., 2014) and interaction focused (Guo et al., 2016b). The earlier focus of neural ranking models was mainly on representation
+based models (Hu et al., 2014; Shen et al., 2014), in which the query and documents are first embedded into continuous vectors, and the ranking is calculated based on their embeddings’ similarity.
+The interaction focused neural models (Hu et al., 2014; Pang et al., 2016; Guo et al., 2016a), on the
+other hand, learn query-document matching patterns from word-level interactions. Both the interaction and representation focused models can be combined for further improvements (Mitra et al.,
+2017). Similarly, Jaech et al. (2017) captures both local relevance matching and global topicality
+signals when computing relevance of a document to a query
+
 我们发现Open-domain QA慢慢引起大家重视和兴趣是因为现在传统的问答任务的模型表现越来越好了，所以大家想结合信息检索和传统问答需要的机器阅读理解两个技术来研究open-domain QA，使得问答任务变得更具有普遍性和易使用性，因为此时不需要直接给予阅读理解模型包含所有能回答上问题的推理信息的阅读材料，而需要利用信息检索技术去搜寻和问题相关的材料。然而，信息检索在open-domain QA上的表现并没有很好，这就导致ODQA并没有传统的问答任务的表现好，因为如今和问题相关的阅读材料要么是经由search engine检索出来的文章或者是利用传统的IR技术在大范围材料中进行检索，这些IR模型一个很大的优点就是检索速度非常快（多快？）。但是这些检索出来的文章可能包含能回答上问题的答案和信息，也有可能不包含，所以这样的传统IR模型的检索能力有待考究和加强。而NLP researchers普遍希望通过模型的RC能力来提高ODQA模型的整体表现，这是片面的，因为RC只是ODQA的一部分。随着不同难度以及不同类型的QA dataset的出现，它们对MRC提出的要求也越来越高，因此很多NLP researchers也关注于研究新的reading comprehension model来在这些QA dataset上取得更好的表现。但是同样的研究力度和兴趣并没有给予到IR model上，researchers往往都先从reading comprehension方面来对不同种类不同难度的questions进行突破。所以几乎没有人从IR的角度去研究这些不同难度不同种类的question对IR的影响是什么，从而再根据研究和发现来改善如今open-domain QA里IR部分的能力。
 
 如今，也有很多工作对IR进行了研究，比如增加了不同的neural ranker或者是多重传统IR模型结合或者是利用强化学习和多任务学习等技术加强IR部分，表现都有所上升。但是，这些研究没有先对根本的问题进行研究，也就是这些工作都是在open-domain QA使用的传统IR模型之后做了很多工作加强检索效果，但是传统的IR模型主要在用户提出的哪些种类的问题上表现差，原因又是什么，这些因素目前没有文章去研究。如果能尽量准确、全面和详细的考察不同种类的问题对IR模型的影响，同时挖掘IR模型主要在哪些问题下表现不好的原因，可能会对之后对IR模型的研究和改善有帮助，因为找到了主要导致IR模型表现差的问题类型以及原因，之后在技术的改善上也有了针对性，便可以大幅度的去提升整个open-domain QA里IR部分的表现，使得整体表现更好。
